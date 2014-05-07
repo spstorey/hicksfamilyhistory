@@ -1,0 +1,11 @@
+<configuration scan="true">
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-6X{requestId} - %-5level - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="STDOUT">
+        <appender-ref ref="appender"/>
+    </root>
+</configuration>
