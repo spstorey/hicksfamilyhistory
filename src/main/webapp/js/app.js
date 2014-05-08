@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('app', ['ngResource','ngRoute']);
+var app = angular.module('app', ['ngResource','ngRoute','ui.bootstrap']);
 
 app.config(['$routeProvider', function($routeProvider) {
 	$routeProvider.
@@ -9,9 +9,20 @@ app.config(['$routeProvider', function($routeProvider) {
 }]);
 
 
-var SplashCtrl = function ($scope, $http) {
+var SplashCtrl = function ($scope) {
 
-	$http.get('/rest/splash').success(function(data) {
-        $scope.splash = data;
-    });
+    $scope.slides = [
+        {
+            image: 'https://copy.com/KcXFL4TvROdF',
+            text: 'Dan, Lauren, Sharon and Jessie'
+        },
+        {
+            image: 'https://copy.com/w9rE9k7RQnsi',
+            text: 'Me !'
+        },
+        {
+            image: 'https://copy.com/iZ8WblnUDQsX',
+            text: 'My beautiful wife and me'
+        }
+    ];
 };

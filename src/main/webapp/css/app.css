@@ -1,74 +1,64 @@
 html {
+
+}
+
+body {
     background: url(../img/rocks.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-}
-
-body {
-    /*background: #e7e7e7;*/
-    margin: 0px;
+    margin: 0;
     font-family: 'Open Sans', sans-serif;
     font-size: 15px;
+    padding-top: 70px;
 }
 
-.menubar {
-    background: #000000;
-    margin-top: 20px;
-    padding-left: 100px;
+.container {
+    width: 1024px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 0;
+    padding-right: 0;
 }
 
-.menubar h1 {
-    color: white;
-    font-size: 50px;
-    padding-top: 5px;
-    padding-bottom: 5px;
+.panel-heading {
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    background-color: rgba(0,0,0,0.4);
+    color: ghostwhite;
+    font-size: 18px;
 }
 
+.panel {
+    background-color: rgba(0,0,0,0.24);
+    border-radius: 0;
+    border-width: 0;
+    color: ghostwhite;
+}
 
-#main-wrap {
-    margin: 0 auto;
-    max-width: 1282px;
+.navbar-fixed-bottom {
+    background-color: rgba(0,0,0,0.5);
+}
+
+.fb {
+    background-image: url(http://fbstatic-a.akamaihd.net/rsrc.php/v2/yi/r/48iqvDSXkFO.png);
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: -31px -100px;
+    height: 41px;
+    padding: 0;
     position: relative;
-    clear: both;
+    width: 41px;
+    z-index: 2;
+}
+p {
+    line-height: 1.8;
 }
 
-#content-wrap {
-    float: left;
-    min-height: 800px;
-    width: 100%;
+.name {
+    font-family: 'Special Elite', cursive;
+    font-size: 28px;
 }
-
-#content {
-    margin-right: 440px;
-    background: white;
-    width: 824px;
-    min-height: 800px;
-}
-
-#content p, #content h1 {
-    margin-left: 20px;
-    margin-right: 20px;
-}
-
-#sidebar {
-    width: 419px;
-    margin-left: -419px;
-    float: right;
-    overflow: hidden;
-}
-
-/*.page-content {*/
-    /*background: #ffffff;*/
-    /*margin-top: 20px;*/
-    /*padding-bottom: 30px;*/
-    /*margin-left: 100px;*/
-    /*width: 720px;*/
-    /*height: 100%;*/
-/*}*/
-
-/*.blog-content {*/
-    /*padding-left: 50px;*/
-    /*padding-right: 50px;*/
-/*}*/

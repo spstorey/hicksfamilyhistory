@@ -1,22 +1,30 @@
-
-<div class="splash-block"></div>
-<div class="menubar"><h1>Hicks Family History</h1></div>
-
-<div id="main-wrap">
-    <div id="content-wrap">
-        <div id="content">
-            <img class="top-post-image" src="img/jessie.jpg" width="824px" />
-            <h1>Cheeky Chops</h1>
-            <p>Latest photo of Jessie looking super cute.</p>
-            <p>Todays tricks included counting one to ten and being super happy</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel">
+                <div class="panel-heading">Welcome</div>
+                <div class="panel-body">
+                    <p>..to the Hicks Family Website.</p>
+                    <p>
+                        My name is <span class="name">Shaun Storey</span>.
+                    </p>
+                    <p>My mother is <span class="name">Veronica Storey</span> nee <span class="name">Hicks</span>.</p>
+                    <p>My aim is bring together in one place all our families information history, photos, stories, genealogy trees, census scans, birth, marriage and death certificates etc so it can be shared by all but also so it can be discovered by more distant relatives.</p>
+                </div>
+            </div>
+            <!--<video width="360" height="640" controls>-->
+                <!--<source src="https://copy.com/KsgyoGe4N0yB" type="video/mp4">-->
+            <!--</video>-->
+        </div>
+        <div class="col-md-6">
+            <carousel interval="5000">
+                <slide ng-repeat="slide in slides" active="slide.active">
+                    <img data-ng-src="{{slide.image}}" style="margin:auto;">
+                    <div class="carousel-caption">
+                        <p>{{slide.text}}</p>
+                    </div>
+                </slide>
+            </carousel>
         </div>
     </div>
-    <div id="sidebar">
-        <embed
-                width="360" height="640"
-                src="http://www.youtube.com/v/sb-dO0yK-fU"
-                type="application/x-shockwave-flash">
-        </embed>
-    </div>
 </div>
-
