@@ -24,7 +24,6 @@ var SplashCtrl = function ($scope) {
         { image: 'https://copy.com/7rsP7h14gF6L', text: '' },
         { image: 'https://copy.com/yYU0eS9VlTFT', text: '' },
         { image: 'https://copy.com/t9dJoyxL6wFm', text: '' },
-        { image: 'https://copy.com/wPCUPOgz2Q1Y', text: '' },
         { image: 'https://copy.com/UwNLOel4iWmf', text: '' },
         { image: 'https://copy.com/yRHn0H1n6XkG', text: '' },
         { image: 'https://copy.com/MjYAUcWKlIRP', text: '' },
