@@ -2,34 +2,57 @@ package spssoftware.controller;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import spssoftware.domain.Person;
+import spssoftware.business.NameBuilder;
+import spssoftware.dao.PersonDao;
+import spssoftware.jooq.tables.pojos.Person;
+import spssoftware.resource.PersonResource;
+import spssoftware.resource.SearchResource;
+import spssoftware.resource.SummaryResource;
 
-import java.text.DateFormat;
 import java.util.LinkedList;
 import java.util.List;
+
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 @RestController
 public class PersonController {
 
-    @RequestMapping(value = "/persons", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody List<Person> listPersons() {
+    @Autowired
+    private PersonDao personDao;
 
+    @RequestMapping(value = "/persons", produces = "application/hal+json")
+    public @ResponseBody SearchResource listPersons() {
 
-        List<Person> persons =  new LinkedList<Person>();
+        SearchResource searchResource = new SearchResource();
 
-        Person person = new Person();
-        person.setTitle("Mr");
-        person.setFirstName("Shaun");
-        person.setSurname("Storey");
-        person.setBirthDate(DateTime.parse("13/07/1977", DateTimeFormat.forPattern("dd/MM/yyyy")).toDate());
-        persons.add(person);
+        List<SummaryResource> summaries = new LinkedList<SummaryResource>();
+        for (Person person : personDao.getPersons()) {
+            SummaryResource summaryResource  = new SummaryResource();
+            summaryResource.setName(new NameBuilder().withTitle(person.getTitle()).withFirstName(person.getFirstname()).withSurname(person.getSurname()).build());
+            summaryResource.add(ControllerLinkBuilder.linkTo(methodOn(PersonController.class).getPerson(person.getId())).withSelfRel());
+            summaries.add(summaryResource);
+        }
 
-        return persons;
+        searchResource.get_embedded().put("persons", summaries);
+
+        return searchResource;
+    }
+
+    @RequestMapping(value = "/persons/{id}", produces = "application/hal+json")
+    public @ResponseBody PersonResource getPerson(@RequestParam("id") String id) {
+        Person person = personDao.getById(id);
+        PersonResource personResource = new PersonResource();
+        personResource.setTitle(person.getTitle());
+        personResource.setFirstName(person.getFirstname());
+        personResource.setSurname(person.getSurname());
+        personResource.add(ControllerLinkBuilder.linkTo(methodOn(PersonController.class).getPerson(person.getId())).withSelfRel());
+        return personResource;
     }
 }

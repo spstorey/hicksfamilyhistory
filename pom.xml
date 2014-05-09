@@ -41,6 +41,54 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.jooq</groupId>
+                <artifactId>jooq-codegen-maven</artifactId>
+                <version>3.3.2</version>
+
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>5.1.30</version>
+                    </dependency>
+                </dependencies>
+
+                <configuration>
+                    <jdbc>
+                        <driver>com.mysql.jdbc.Driver</driver>
+                        <url>jdbc:mysql://us-cdbr-cb-east-01.cleardb.net/cb_hicks</url>
+                        <user>badbccb0d21256</user>
+                        <password>76e76ed4</password>
+                    </jdbc>
+
+                    <generator>
+                        <name>org.jooq.util.DefaultGenerator</name>
+                        <database>
+                            <name>org.jooq.util.mysql.MySQLDatabase</name>
+                            <includes>.*</includes>
+                            <excludes></excludes>
+                            <inputSchema>cb_hicks</inputSchema>
+                        </database>
+                        <generate>
+                            <pojos>true</pojos>
+                        </generate>
+                        <target>
+                            <packageName>spssoftware.jooq</packageName>
+                            <directory>target/generated-sources</directory>
+                        </target>
+                    </generator>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
@@ -51,6 +99,48 @@
             <artifactId>spring-boot-starter-web</artifactId>
             <version>1.0.2.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>4.0.3.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.hateoas</groupId>
+            <artifactId>spring-hateoas</artifactId>
+            <version>0.10.0.RELEASE</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-aop</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-context</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.jooq</groupId>
+            <artifactId>jooq</artifactId>
+            <version>3.3.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-dbcp2</artifactId>
+            <version>2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.30</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.178</version>
+        </dependency>
+
 
         <dependency>
             <groupId>joda-time</groupId>
