@@ -3,16 +3,16 @@ package spssoftware.controller;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import spssoftware.business.NameBuilder;
 import spssoftware.dao.PersonDao;
 import spssoftware.jooq.tables.pojos.Person;
 import spssoftware.resource.PersonResource;
+import spssoftware.resource.PersonResourceAssember;
 import spssoftware.resource.SearchResource;
 import spssoftware.resource.SummaryResource;
 
@@ -27,32 +27,26 @@ public class PersonController {
     @Autowired
     private PersonDao personDao;
 
+    @Autowired
+    private PersonResourceAssember personResourceAssember;
+
     @RequestMapping(value = "/persons", produces = "application/hal+json")
     public @ResponseBody SearchResource listPersons() {
-
-        SearchResource searchResource = new SearchResource();
-
-        List<SummaryResource> summaries = new LinkedList<SummaryResource>();
-        for (Person person : personDao.getPersons()) {
-            SummaryResource summaryResource  = new SummaryResource();
-            summaryResource.setName(new NameBuilder().withTitle(person.getTitle()).withFirstName(person.getFirstname()).withSurname(person.getSurname()).build());
-            summaryResource.add(ControllerLinkBuilder.linkTo(methodOn(PersonController.class).getPerson(person.getId())).withSelfRel());
-            summaries.add(summaryResource);
-        }
-
-        searchResource.get_embedded().put("persons", summaries);
-
-        return searchResource;
+        return personResourceAssember.toSearchResource(personDao.getPersons());
     }
 
-    @RequestMapping(value = "/persons/{id}", produces = "application/hal+json")
-    public @ResponseBody PersonResource getPerson(@RequestParam("id") String id) {
-        Person person = personDao.getById(id);
-        PersonResource personResource = new PersonResource();
-        personResource.setTitle(person.getTitle());
-        personResource.setFirstName(person.getFirstname());
-        personResource.setSurname(person.getSurname());
-        personResource.add(ControllerLinkBuilder.linkTo(methodOn(PersonController.class).getPerson(person.getId())).withSelfRel());
-        return personResource;
+    @RequestMapping(value = "/persons", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/hal+json")
+    public @ResponseBody PersonResource createPerson(@RequestBody PersonResource personResource) {
+        return personResourceAssember.toResource(personDao.createPerson(personResourceAssember.fromResource(personResource)));
+    }
+
+    @RequestMapping(value = "/persons/{personId}", produces = "application/hal+json")
+    public @ResponseBody PersonResource getPerson(@PathVariable("personId") String personId) {
+        return personResourceAssember.toResource(personDao.getByPersonId(personId));
+    }
+
+    @RequestMapping(value = "/persons/{personId}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/hal+json")
+    public @ResponseBody PersonResource replacePerson(@PathVariable("personId") String personId, @RequestBody PersonResource personResource) {
+        return personResourceAssember.toResource(personDao.replacePerson(personId, personResourceAssember.fromResource(personResource)));
     }
 }

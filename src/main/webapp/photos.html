@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="panel-heading">Photos</div>
+                <div class="panel-body">
+                    <p>Here are some of my latest photos...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <carousel interval="5000">
+                <slide ng-repeat="slide in slides" active="slide.active">
+                    <img data-ng-src="{{slide.image}}" style="margin:auto;">
+                    <div class="carousel-caption">
+                        <p>{{slide.text}}</p>
+                    </div>
+                </slide>
+            </carousel>
+        </div>
+    </div>
+</div>

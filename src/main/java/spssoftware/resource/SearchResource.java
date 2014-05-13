@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SearchResource {
+public class SearchResource extends ResourceSupport {
 
     private Map<String,List<SummaryResource>> _embedded = new HashMap<String,List<SummaryResource>>();
 

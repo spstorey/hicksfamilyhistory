@@ -4,17 +4,35 @@ var app = angular.module('app', ['ngResource','ngRoute','ui.bootstrap']);
 
 app.config(['$routeProvider', function($routeProvider) {
 	$routeProvider.
-		when('/', {templateUrl: 'spalsh.html', controller: SplashCtrl}).
+		when('/', {templateUrl: 'splash.html', controller: SplashCtrl}).
+        when('/people', {templateUrl: 'people.html', controller: PeopleCtrl}).
+        when('/photos', {templateUrl: 'photos.html', controller: PhotosCtrl}).
+        when('/tree', {templateUrl: 'tree.html', controller: TreeCtrl}).
+        when('/contact', {templateUrl: 'contact.html', controller: ContactCtrl}).
 		otherwise({redirectTo: '/'});
 }]);
 
+var TreeCtrl = function ($scope) {
+};
 
-var SplashCtrl = function ($scope) {
+var PeopleCtrl = function ($scope) {
+};
+
+var ContactCtrl = function ($scope) {
+};
+
+var PhotosCtrl = function ($scope) {
 
     $scope.slides = [
         { image: 'https://copy.com/KcXFL4TvROdF', text: 'Dan, Lauren, Sharon and Jessie' },
         { image: 'https://copy.com/w9rE9k7RQnsi', text: 'Me !' },
-        { image: 'https://copy.com/iZ8WblnUDQsX', text: 'My beautiful wife and me' },
+        { image: 'https://copy.com/iZ8WblnUDQsX', text: 'My beautiful wife and me' }
+    ];
+};
+
+var SplashCtrl = function ($scope) {
+
+    $scope.slides = [
         { image: 'https://copy.com/CZfPLD6RjZqC', text: '' },
         { image: 'https://copy.com/mSqgSyvPprLh', text: '' },
         { image: 'https://copy.com/2Zv76oHQMiTi', text: '' },
@@ -24,7 +42,6 @@ var SplashCtrl = function ($scope) {
         { image: 'https://copy.com/7rsP7h14gF6L', text: '' },
         { image: 'https://copy.com/yYU0eS9VlTFT', text: '' },
         { image: 'https://copy.com/t9dJoyxL6wFm', text: '' },
-        { image: 'https://copy.com/UwNLOel4iWmf', text: '' },
         { image: 'https://copy.com/yRHn0H1n6XkG', text: '' },
         { image: 'https://copy.com/MjYAUcWKlIRP', text: '' },
         { image: 'https://copy.com/tGu0eS66yb2h', text: '' },

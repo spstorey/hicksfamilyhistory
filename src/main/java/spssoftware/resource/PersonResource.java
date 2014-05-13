@@ -6,6 +6,7 @@ import java.util.Date;
 
 public class PersonResource extends ResourceSupport {
 
+    private String personId;
     private String title;
     private String firstName;
     private String middleNames;
@@ -14,6 +15,14 @@ public class PersonResource extends ResourceSupport {
     private String job;
     private Date birthDate;
     private Date deathDate;
+
+    public String getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(String personId) {
+        this.personId = personId;
+    }
 
     public String getTitle() {
         return title;

@@ -60,7 +60,7 @@ p {
 
 .name {
     font-family: 'Special Elite', cursive;
-    font-size: 28px;
+    font-size: 22px;
 }
 
 .carousel-indicators {
@@ -70,4 +70,12 @@ p {
 }
 .carousel-control {
     opacity: .1;
+}
+
+.container-fluid {
+    margin-bottom: 60px;
+}
+
+.icon {
+    margin-right: 30px;
 }
