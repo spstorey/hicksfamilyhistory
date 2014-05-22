@@ -21,13 +21,13 @@ var PeopleCtrl = function ($scope) {
 var ContactCtrl = function ($scope) {
 };
 
-var PhotosCtrl = function ($scope) {
+var PhotosCtrl = function ($scope, $http) {
 
-    $scope.slides = [
-        { image: 'https://copy.com/KcXFL4TvROdF', text: 'Dan, Lauren, Sharon and Jessie' },
-        { image: 'https://copy.com/w9rE9k7RQnsi', text: 'Me !' },
-        { image: 'https://copy.com/iZ8WblnUDQsX', text: 'My beautiful wife and me' }
-    ];
+    $http.get('/media/folders').success(function(data) {
+
+        $scope.folders = data._embedded.folders;
+        console.log($scope.folders);
+    });
 };
 
 var SplashCtrl = function ($scope) {

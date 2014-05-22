@@ -9,16 +9,28 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <carousel interval="5000">
-                <slide ng-repeat="slide in slides" active="slide.active">
-                    <img data-ng-src="{{slide.image}}" style="margin:auto;">
-                    <div class="carousel-caption">
-                        <p>{{slide.text}}</p>
+
+    <tabset justified="true">
+        <tab ng-repeat="folder in folders" heading="{{ folder.name }}">{{ folder.name }}</tab>
+    </tabset>
+
+   <!-- <div ng-repeat="folder in folders">
+        <span ng-switch="" on="$index % 4">
+            <div class="row" ng-switch-when="0">
+                <div class="col-md-3" ng-show="folders[$index+0]">
+                    <div class="panel">
+
+                        <div class="panel-body">
+
+                        </div>
+                        <div class="panel-footer">{{folders[$index+1].name}}</div>
                     </div>
-                </slide>
-            </carousel>
-        </div>
-    </div>
+
+                    {{folders[$index+0].name}}</div>
+                <div class="col-md-3" ng-show="folders[$index+1]">{{folders[$index+1].name}}</div>
+                <div class="col-md-3" ng-show="folders[$index+2]">{{folders[$index+2].name}}</div>
+                <div class="col-md-3" ng-show="folders[$index+2]">{{folders[$index+3].name}}</div>
+            </div>
+        </span>
+    </div>-->
 </div>

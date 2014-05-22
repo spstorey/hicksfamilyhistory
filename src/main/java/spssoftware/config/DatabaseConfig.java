@@ -68,7 +68,7 @@ public class DatabaseConfig {
 	}
 
 	@Bean
-	public DSLContext dsl() {
+	public DSLContext connection() {
 		return new DefaultDSLContext(dbConfig());
 	}
 }
