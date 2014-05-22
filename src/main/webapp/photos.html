@@ -10,27 +10,41 @@
         </div>
     </div>
 
-    <tabset justified="true">
-        <tab ng-repeat="folder in folders" heading="{{ folder.name }}">{{ folder.name }}</tab>
-    </tabset>
 
-   <!-- <div ng-repeat="folder in folders">
-        <span ng-switch="" on="$index % 4">
-            <div class="row" ng-switch-when="0">
-                <div class="col-md-3" ng-show="folders[$index+0]">
-                    <div class="panel">
-
-                        <div class="panel-body">
-
-                        </div>
-                        <div class="panel-footer">{{folders[$index+1].name}}</div>
+    <div data-ng-repeat="album in albums" data-ng-switch="$index%4">
+        <div class="row" ng-switch-when="0">
+            <div class="col-md-3">
+                <div class="panel panel-thumb">
+                    <div class="panel-body">
+                        <img data-ng-src="{{ albums[$index+0].coverPhoto }}" width="234px"/>
                     </div>
-
-                    {{folders[$index+0].name}}</div>
-                <div class="col-md-3" ng-show="folders[$index+1]">{{folders[$index+1].name}}</div>
-                <div class="col-md-3" ng-show="folders[$index+2]">{{folders[$index+2].name}}</div>
-                <div class="col-md-3" ng-show="folders[$index+2]">{{folders[$index+3].name}}</div>
+                    <div class="panel-footer">{{albums[$index+0].name}}</div>
+                </div>
             </div>
-        </span>
-    </div>-->
+            <div class="col-md-3">
+                <div class="panel panel-thumb">
+                    <div class="panel-body">
+                        <img data-ng-src="{{ albums[$index+1].coverPhoto }}" width="234px"/>
+                    </div>
+                    <div class="panel-footer">{{albums[$index+1].name}}</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="panel panel-thumb">
+                    <div class="panel-body">
+                        <img data-ng-src="{{ albums[$index+2].coverPhoto }}" width="234px"/>
+                    </div>
+                    <div class="panel-footer">{{albums[$index+2].name}}</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="panel panel-thumb">
+                    <div class="panel-body">
+                        <img data-ng-src="{{ albums[$index+3].coverPhoto }}" width="234px"/>
+                    </div>
+                    <div class="panel-footer">{{albums[$index+3].name}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

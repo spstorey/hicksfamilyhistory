@@ -16,60 +16,37 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 @Component
 public class MediaResourceAssember {
 
-    public SearchResource toSearchResource(Map<String, Map<String, Album>> content) {
+    public SearchResource toSearchResource(Map<String, Album> albums) {
         SearchResource searchResource = new SearchResource();
-        List<SummaryResource> summaries = new LinkedList<SummaryResource>();
-        for (String folderName : content.keySet()) {
+        List<SummaryResource> summaries = new LinkedList<>();
+        for (Map.Entry<String, Album> albumEntry : albums.entrySet()) {
             SummaryResource summaryResource = new SummaryResource();
-            summaryResource.setName(folderName);
+            summaryResource.setName(albumEntry.getValue().getName());
             summaries.add(summaryResource);
-            summaryResource.add(ControllerLinkBuilder.linkTo(methodOn(MediaController.class).getFolder(folderName)).withSelfRel());
-        }
-
-        searchResource.get_embedded().put("folders", summaries);
-        searchResource.add(ControllerLinkBuilder.linkTo(methodOn(MediaController.class).listFolders()).withSelfRel());
-        return searchResource;
-    }
-
-    public FolderResource toFolderResource(String name) {
-        FolderResource folderResource = new FolderResource();
-        folderResource.setName(name);
-        folderResource.add(ControllerLinkBuilder.linkTo(methodOn(MediaController.class).getFolder(name)).withSelfRel());
-        folderResource.add(ControllerLinkBuilder.linkTo(methodOn(MediaController.class).listAlbums(name)).withRel("albums"));
-        return folderResource;
-    }
-
-    public SearchResource toSearchResource(String folderName, Map<String, Album> albums) {
-        SearchResource searchResource = new SearchResource();
-        List<SummaryResource> summaries = new LinkedList<SummaryResource>();
-        for (Map.Entry<String, Album> folderEntry : albums.entrySet()) {
-            SummaryResource summaryResource = new SummaryResource();
-            summaryResource.setName(folderEntry.getValue().getName());
-            summaries.add(summaryResource);
-            summaryResource.add(ControllerLinkBuilder.linkTo(methodOn(MediaController.class).getAlbum(folderName, folderEntry.getValue().getName())).withSelfRel());
+            summaryResource.add(ControllerLinkBuilder.linkTo(methodOn(MediaController.class).getAlbum(albumEntry.getValue().getName())).withSelfRel());
         }
 
         searchResource.get_embedded().put("albums", summaries);
-        searchResource.add(ControllerLinkBuilder.linkTo(methodOn(MediaController.class).listAlbums(folderName)).withSelfRel());
+        searchResource.add(ControllerLinkBuilder.linkTo(methodOn(MediaController.class).listAlbums()).withSelfRel());
         return searchResource;
     }
 
-    public AlbumResource toAlbumResource(String folderName, Album album) {
+    public AlbumResource toAlbumResource(Album album) {
         AlbumResource albumResource = new AlbumResource();
         albumResource.setName(album.getName());
         albumResource.setDisplayDate(album.getDisplayDate());
-        albumResource.add(ControllerLinkBuilder.linkTo(methodOn(MediaController.class).getAlbum(folderName, album.getName())).withSelfRel());
+        albumResource.add(ControllerLinkBuilder.linkTo(methodOn(MediaController.class).getAlbum(album.getName())).withSelfRel());
         if (album.getCoverPhoto() != null) {
             albumResource.add(new Link(album.getCoverPhoto().getUrl()).withRel("coverPhoto"));
         }
-        albumResource.add(ControllerLinkBuilder.linkTo(methodOn(MediaController.class).listPhotos(folderName, album.getName())).withRel("photos"));
+        albumResource.add(ControllerLinkBuilder.linkTo(methodOn(MediaController.class).listPhotos(album.getName())).withRel("photos"));
 
         return albumResource;
     }
 
-    public SearchResource toSearchResource(String folderName, String albumName, Album album) {
+    public SearchResource toSearchResource(Album album) {
         SearchResource searchResource = new SearchResource();
-        List<SummaryResource> summaries = new LinkedList<SummaryResource>();
+        List<SummaryResource> summaries = new LinkedList<>();
         for (Photo photo : album.getPhotos()) {
             SummaryResource summaryResource = new SummaryResource();
             summaryResource.setName(photo.getCaption());
@@ -79,7 +56,7 @@ public class MediaResourceAssember {
         }
 
         searchResource.get_embedded().put("photos", summaries);
-        searchResource.add(ControllerLinkBuilder.linkTo(methodOn(MediaController.class).listPhotos(folderName, album.getName())).withSelfRel());
+        searchResource.add(ControllerLinkBuilder.linkTo(methodOn(MediaController.class).listPhotos(album.getName())).withSelfRel());
         return searchResource;
     }
 }

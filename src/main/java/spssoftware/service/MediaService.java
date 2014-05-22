@@ -31,16 +31,14 @@ public class MediaService {
 
     private KeyDao keyDao;
 
-    private static Map<String, Map<String, Album>> albums = new HashMap<>();
+    private static Map<String, Album> albums = new HashMap<>();
 
     @Autowired
     public MediaService(KeyDao keyDao) {
         this.keyDao = keyDao;
     }
 
-    public Map<String, Map<String, Album>> getContent() {
-
-        albums = new HashMap<>();
+    public Map<String, Album> getAlbums() {
 
         if (albums.size() == 0) {
 
@@ -52,64 +50,47 @@ public class MediaService {
                 String albumLinkUrl = copyUrl + "/" + SITE;
                 String token = copyUrl.substring(copyUrl.lastIndexOf("/"));
 
-                JSONArray children = root.getJSONArray("children");
-                for (int i = 0; i < children.size(); i++) {
+                JSONArray albumList = root.getJSONArray("children");
+                for (int i = 0; i < albumList.size(); i++) {
 
-                    Map<String, Album> albumMap = new HashMap<>();
+                    String albumName = albumList.getJSONObject(i).getString("name");
 
-                    String separator = children.getJSONObject(i).getString("name");
+                    Album album = new Album();
+                    if (albumName.contains("^")) {
+                        String[] nameParts = albumName.split("^");
+                        album.setName(nameParts[1]);
+                        album.setDate(nameParts[0]);
+                    } else {
+                        album.setName(albumName);
+                    }
 
-                    String separatorFolderContentsResponse = get(ROOT_URL + "/" + separator);
-                    if (separatorFolderContentsResponse != null) {
-                        JSONObject separatorFolderContents = JSONObject.parseObject(separatorFolderContentsResponse);
+                    String albumResponse = get(ROOT_URL + "/" + albumName);
 
-                        JSONArray separatorFolderContentsList = separatorFolderContents.getJSONArray("children");
-                        for (int j = 0; j < separatorFolderContentsList.size(); j++) {
+                    if (albumResponse != null) {
+                        JSONObject albumFolder = JSONObject.parseObject(albumResponse);
 
-                            JSONObject separatorFolderContentsListItem = separatorFolderContentsList.getJSONObject(j);
+                        JSONArray albumFileList = albumFolder.getJSONArray("children");
 
-                            String albumName = separatorFolderContentsListItem.getString("name");
+                        for (int k = 0; k < albumFileList.size(); k++) {
 
-                            Album album = new Album();
-                            if (albumName.contains("^")) {
-                                String[] nameParts = albumName.split("^");
-                                album.setName(nameParts[1]);
-                                album.setDate(nameParts[0]);
+                            JSONObject albumFileListItem = albumFileList.getJSONObject(k);
+                            String filename = albumFileListItem.getString("name");
+
+                            Photo photo = new Photo();
+                            photo.setFilename(filename);
+                            photo.setUrl(albumLinkUrl + "/" + albumName + "/" + filename);
+                            photo.setThumbnailUrl("https://copy.com/thumbs_public" + token + "/" + SITE + "/" + albumName + "/" + filename + "?size={size}");
+                            if (filename.startsWith("cover")) {
+                                album.setCoverPhoto(photo);
                             } else {
-                                album.setName(albumName);
-                            }
-
-                            String albumFolderResponse = get(ROOT_URL + "/" + separator + "/" + albumName);
-
-                            if (albumFolderResponse != null) {
-                                JSONObject albumFolder = JSONObject.parseObject(albumFolderResponse);
-
-                                JSONArray albumFileList = albumFolder.getJSONArray("children");
-
-                                for (int k = 0; k < albumFileList.size(); k++) {
-
-                                    JSONObject albumFileListItem = albumFileList.getJSONObject(k);
-                                    String filename = albumFileListItem.getString("name");
-
-                                    Photo photo = new Photo();
-                                    photo.setFilename(filename);
-                                    photo.setUrl(albumLinkUrl + "/" + separator + "/" + albumName + "/" + filename);
-                                    photo.setThumbnailUrl("https://copy.com/thumbs_public" + token + "/" + SITE + "/" + separator + "/" + albumName + "/" + filename + "?size={size}");
-                                    if (filename.startsWith("cover")) {
-                                        album.setCoverPhoto(photo);
-                                    } else {
-                                        if (!filename.startsWith("DSC")) {
-                                            photo.setCaption(filename.substring(0, filename.indexOf(".")));
-                                        }
-                                        album.getPhotos().add(photo);
-                                    }
+                                if (!filename.startsWith("DSC")) {
+                                    photo.setCaption(filename.substring(0, filename.indexOf(".")));
                                 }
-                                albumMap.put(album.getName(), album);
+                                album.getPhotos().add(photo);
                             }
                         }
                     }
-
-                    albums.put(separator, albumMap);
+                    albums.put(album.getName(), album);
                 }
             }
         }
@@ -140,9 +121,9 @@ public class MediaService {
         WebResource webResource = client.resource(encodedUrl);
         webResource.addFilter(filter);
 
-        WebResource.Builder builder = webResource.header("Accept", MediaType.APPLICATION_JSON).header("X-Api-Version","1");
+        WebResource.Builder builder = webResource.header("Accept", MediaType.APPLICATION_JSON).header("X-Api-Version", "1");
 
-        ClientResponse response = builder.get(ClientResponse .class);
+        ClientResponse response = builder.get(ClientResponse.class);
         if (HttpStatus.OK.value() == response.getStatus()) {
             return response.getEntity(String.class);
         } else {

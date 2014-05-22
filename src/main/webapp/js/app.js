@@ -5,6 +5,7 @@ var app = angular.module('app', ['ngResource','ngRoute','ui.bootstrap']);
 app.config(['$routeProvider', function($routeProvider) {
 	$routeProvider.
 		when('/', {templateUrl: 'splash.html', controller: SplashCtrl}).
+        when('/news', {templateUrl: 'news.html', controller: NewsCtrl}).
         when('/people', {templateUrl: 'people.html', controller: PeopleCtrl}).
         when('/photos', {templateUrl: 'photos.html', controller: PhotosCtrl}).
         when('/tree', {templateUrl: 'tree.html', controller: TreeCtrl}).
@@ -12,22 +13,38 @@ app.config(['$routeProvider', function($routeProvider) {
 		otherwise({redirectTo: '/'});
 }]);
 
-var TreeCtrl = function ($scope) {
+var NewsCtrl = function ($scope) {
 };
 
 var PeopleCtrl = function ($scope) {
 };
 
-var ContactCtrl = function ($scope) {
-};
-
 var PhotosCtrl = function ($scope, $http) {
 
-    $http.get('/media/folders').success(function(data) {
+    $http.get('/media/albums').success(function (data) {
 
-        $scope.folders = data._embedded.folders;
-        console.log($scope.folders);
+        $scope.albums = data._embedded.albums;
+
+        for (var cursor in $scope.albums) {
+
+            $http.get($scope.albums[cursor]._links.self.href).success(function (album) {
+                if (album._links.coverPhoto) {
+                    for (var finder in $scope.albums) {
+                        if ($scope.albums[finder].name === album.name) {
+                            $scope.albums[finder].coverPhoto = album._links.coverPhoto.href;
+                            console.log($scope.albums[finder]);
+                        }
+                    }
+                }
+            });
+        }
     });
+};
+
+var TreeCtrl = function ($scope) {
+};
+
+var ContactCtrl = function ($scope) {
 };
 
 var SplashCtrl = function ($scope) {

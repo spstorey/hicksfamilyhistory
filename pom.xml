@@ -13,7 +13,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring.version>4.0.4.RELEASE</spring.version>
+        <spring.version>4.0.5.RELEASE</spring.version>
         <db.driver>org.h2.Driver</db.driver>
         <compile.db.url>jdbc:h2:file:target/h2/compile-db</compile.db.url>
         <runtime.db.url>jdbc:h2:file:target/classes/target/runtime-db</runtime.db.url>
@@ -32,12 +32,27 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
-            <version>4.0.3.RELEASE</version>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.plugin</groupId>
+            <artifactId>spring-plugin-core</artifactId>
+            <version>1.1.0.RELEASE</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-aop</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-context</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.hateoas</groupId>
             <artifactId>spring-hateoas</artifactId>
-            <version>0.10.0.RELEASE</version>
+            <version>0.12.0.RELEASE</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework</groupId>
@@ -88,12 +103,6 @@
             <version>1.1.37</version>
         </dependency>
 
-<!--        <dependency>
-            <groupId>org.glassfish.jersey.security</groupId>
-            <artifactId>oauth1-client</artifactId>
-            <version>2.8</version>
-        </dependency>-->
-
         <dependency>
             <groupId>com.sun.jersey.contribs.jersey-oauth</groupId>
             <artifactId>oauth-signature</artifactId>
@@ -104,9 +113,6 @@
             <artifactId>oauth-client</artifactId>
             <version>1.18.1</version>
         </dependency>
-
-
-
 
         <dependency>
             <groupId>joda-time</groupId>
@@ -140,7 +146,7 @@
         </dependency>
     </dependencies>
 
-	<build>
+    <build>
         <finalName>hicksfamilyhistory</finalName>
         <plugins>
             <plugin>
