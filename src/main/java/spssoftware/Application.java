@@ -3,6 +3,8 @@ package spssoftware;
 import com.googlecode.flyway.core.Flyway;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
+import org.springframework.boot.context.embedded.jetty.JettyEmbeddedServletContainerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -30,6 +32,11 @@ public class Application {
 
         SpringApplication application = new SpsApplication(Application.class);
         application.run(args);
+    }
+
+    @Bean
+    public EmbeddedServletContainerFactory servletContainer() {
+        return new JettyEmbeddedServletContainerFactory(System.getProperty("PORT") == null ? 8080 : Integer.valueOf(System.getProperty("PORT")));
     }
 
     @Bean
