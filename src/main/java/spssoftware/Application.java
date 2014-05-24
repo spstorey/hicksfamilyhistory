@@ -36,6 +36,7 @@ public class Application {
 
     @Bean
     public EmbeddedServletContainerFactory servletContainer() {
+        System.out.print("Opening on port" + System.getProperty("PORT") == null ? 8080 : Integer.valueOf(System.getProperty("PORT")));
         return new JettyEmbeddedServletContainerFactory(System.getProperty("PORT") == null ? 8080 : Integer.valueOf(System.getProperty("PORT")));
     }
 
