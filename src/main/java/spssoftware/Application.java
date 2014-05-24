@@ -29,15 +29,14 @@ public class Application {
         flyway.setInitOnMigrate(true);
         flyway.setTable("CHANGELOG");
         flyway.migrate();
-        System.out.print("Opening on port" + System.getProperty("PORT"));
+        System.out.print("Opening on port" + System.getenv("PORT"));
         SpringApplication application = new SpsApplication(Application.class);
         application.run(args);
     }
 
     @Bean
     public EmbeddedServletContainerFactory servletContainer() {
-        System.out.print("Opening on port" + System.getProperty("PORT") == null ? 8080 : Integer.valueOf(System.getProperty("PORT")));
-        return new JettyEmbeddedServletContainerFactory(System.getProperty("PORT") == null ? 8080 : Integer.valueOf(System.getProperty("PORT")));
+        return new JettyEmbeddedServletContainerFactory(System.getenv("PORT") == null ? 8080 : Integer.valueOf(System.getenv("PORT")));
     }
 
     @Bean
