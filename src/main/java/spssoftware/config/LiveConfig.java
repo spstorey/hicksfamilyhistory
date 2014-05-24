@@ -8,10 +8,8 @@ import java.net.URISyntaxException;
 public class LiveConfig extends Config {
 
     public String getDatabaseDriver() {
-        return "org.apache.commons.dbcp.BasicDataSource";
+        return "org.postgres.Driver";
     }
-
-    ;
 
     public String getDatabaseUsername() {
         return getDBUri().getUserInfo().split(":")[0];
