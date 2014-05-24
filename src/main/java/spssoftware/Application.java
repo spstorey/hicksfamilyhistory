@@ -29,7 +29,7 @@ public class Application {
         flyway.setInitOnMigrate(true);
         flyway.setTable("CHANGELOG");
         flyway.migrate();
-
+        System.out.print("Opening on port" + System.getProperty("PORT") == null ? 8080 : Integer.valueOf(System.getProperty("PORT")));
         SpringApplication application = new SpsApplication(Application.class);
         application.run(args);
     }
