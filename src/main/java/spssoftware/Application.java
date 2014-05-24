@@ -30,6 +30,7 @@ public class Application {
         flyway.setTable("CHANGELOG");
         flyway.migrate();
         System.out.print("Opening on port" + System.getenv("PORT"));
+        System.out.print("Opening db " + System.getenv("DATABASE_URL"));
         SpringApplication application = new SpsApplication(Application.class);
         application.run(args);
     }
