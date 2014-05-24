@@ -5,23 +5,17 @@ import org.jooq.SQLDialect;
 
 public abstract class Config {
 
-	public String getDatabaseUsername() {
-		return "badbccb0d21256";
-	}
+    public abstract String getDatabaseUsername();
 
-	public abstract String getDatabasePassword();
+    public abstract String getDatabasePassword();
 
-	public abstract String getDatabaseUrl();
-	
-	public String getDatabaseDriver() {
-		return "com.mysql.jdbc.Driver";
-	}
+    public abstract String getDatabaseUrl();
 
-	public SQLDialect getDatabaseDialect() {
-		return SQLDialect.MYSQL;
-	}
+    public abstract String getDatabaseDriver();
 
-	public String getDatabaseSchema() {
-		return "cb_hicks";
-	}
+    public abstract SQLDialect getDatabaseDialect();
+
+    public String getDatabaseSchema() {
+        return "cb_hicks";
+    }
 }
