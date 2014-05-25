@@ -20,8 +20,8 @@ import spssoftware.config.SystemHelper;
 public class Application {
 
     public static void main(String... args) {
-        System.out.print("Opening on port" + System.getenv("PORT"));
-        System.out.print("Opening db " + System.getenv("DATABASE_URL"));
+        System.out.println("Opening on port" + System.getenv("PORT"));
+        System.out.println("Opening db " + System.getenv("DATABASE_URL"));
         Config config = Application.getConfig();
 
         Flyway flyway = new Flyway();

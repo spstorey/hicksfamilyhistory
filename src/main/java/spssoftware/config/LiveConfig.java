@@ -8,19 +8,27 @@ import java.net.URISyntaxException;
 public class LiveConfig extends Config {
 
     public String getDatabaseDriver() {
-        return "org.postgres.Driver";
+        String driver = "org.postgres.Driver";
+        System.out.println(driver);
+        return driver;
     }
 
     public String getDatabaseUsername() {
-        return getDBUri().getUserInfo().split(":")[0];
+        String username = getDBUri().getUserInfo().split(":")[0];
+        System.out.println(username);
+        return username;
     }
 
     public String getDatabasePassword() {
-        return getDBUri().getUserInfo().split(":")[1];
+        String password = getDBUri().getUserInfo().split(":")[1];
+        System.out.println(password);
+        return password;
     }
 
     public String getDatabaseUrl() {
-        return "jdbc:postgresql://" + getDBUri().getHost() + ":" + getDBUri().getPath() + getDBUri().getPath();
+        String url = "jdbc:postgresql://" + getDBUri().getHost() + ":" + getDBUri().getPath() + getDBUri().getPath();
+        System.out.println(url);
+        return url;
     }
 
     public SQLDialect getDatabaseDialect() {
@@ -35,5 +43,4 @@ public class LiveConfig extends Config {
             throw new RuntimeException(e);
         }
     }
-
 }
