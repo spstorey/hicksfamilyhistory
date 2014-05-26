@@ -256,7 +256,7 @@
                         <location>filesystem:src/main/resources/db/migration</location>
                     </locations>
                     <schemas>
-                        <schema>cb_hicks</schema>
+                        <schema>db8mngflmt7sa2</schema>
                     </schemas>
                 </configuration>
                 <executions>
