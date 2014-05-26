@@ -296,7 +296,7 @@
                                     <includes>.*</includes>
                                     <excludes></excludes>
                                     <dateAsTimestamp>true</dateAsTimestamp>
-                                    <inputSchema>cb_hicks</inputSchema>
+                                    <inputSchema>db8mngflmt7sa2</inputSchema>
                                 </database>
                                 <generate>
                                     <deprecated>false</deprecated>
