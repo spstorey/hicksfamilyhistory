@@ -36,6 +36,7 @@ public class Application {
         flyway.setInitOnMigrate(true);
         flyway.setTable("CHANGELOG");
         flyway.migrate();
+
         SpringApplication application = new SpsApplication(Application.class);
         application.run(args);
     }
