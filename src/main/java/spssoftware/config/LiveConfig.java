@@ -8,7 +8,7 @@ import java.net.URISyntaxException;
 public class LiveConfig extends Config {
 
     public String getDatabaseDriver() {
-        return "org.postgres.Driver";
+        return "org.postgresql.Driver";
     }
 
     public String getDatabaseUsername() {
