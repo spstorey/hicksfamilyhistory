@@ -33,7 +33,7 @@ public class DatabaseConfig {
         dataSource.setIdleConnectionTestPeriodInMinutes(2);
         dataSource.setIdleMaxAgeInMinutes(5);
         dataSource.setMaxConnectionsPerPartition(1);
-        dataSource.setMinConnectionsPerPartition(11);
+        dataSource.setMinConnectionsPerPartition(1);
         dataSource.setPartitionCount(1);
         dataSource.setAcquireIncrement(1);
         dataSource.setStatementsCacheSize(100);
