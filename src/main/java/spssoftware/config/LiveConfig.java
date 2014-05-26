@@ -8,27 +8,19 @@ import java.net.URISyntaxException;
 public class LiveConfig extends Config {
 
     public String getDatabaseDriver() {
-        String driver = "org.postgres.Driver";
-        System.out.println(driver);
-        return driver;
+        return "org.postgres.Driver";
     }
 
     public String getDatabaseUsername() {
-        String username = getDBUri().getUserInfo().split(":")[0];
-        System.out.println(username);
-        return username;
+        return getDBUri().getUserInfo().split(":")[0];
     }
 
     public String getDatabasePassword() {
-        String password = getDBUri().getUserInfo().split(":")[1];
-        System.out.println(password);
-        return password;
+        return getDBUri().getUserInfo().split(":")[1];
     }
 
     public String getDatabaseUrl() {
-        String url = "jdbc:postgresql://" + getDBUri().getHost() + ":" + getDBUri().getPath() + getDBUri().getPath();
-        System.out.println(url);
-        return url;
+        return "jdbc:postgresql://" + getDBUri().getHost() + ":" + getDBUri().getPath() + getDBUri().getPath();
     }
 
     public SQLDialect getDatabaseDialect() {
@@ -37,7 +29,7 @@ public class LiveConfig extends Config {
 
     private URI getDBUri() {
         try {
-            return new URI(System.getenv("DATABASE_URL"));
+            return new URI();
         } catch (URISyntaxException e) {
             System.err.print("Cannot parse db uri " + System.getenv("DATABASE_URL"));
             throw new RuntimeException(e);
