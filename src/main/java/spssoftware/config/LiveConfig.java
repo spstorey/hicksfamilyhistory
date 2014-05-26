@@ -29,7 +29,7 @@ public class LiveConfig extends Config {
 
     private URI getDBUri() {
         try {
-            return new URI();
+            return new URI(System.getenv("DATABASE_URL"));
         } catch (URISyntaxException e) {
             System.err.print("Cannot parse db uri " + System.getenv("DATABASE_URL"));
             throw new RuntimeException(e);
