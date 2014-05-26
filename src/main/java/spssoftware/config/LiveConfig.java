@@ -20,7 +20,7 @@ public class LiveConfig extends Config {
     }
 
     public String getDatabaseUrl() {
-        return "jdbc:postgresql://" + getDBUri().getHost() + ":" + getDBUri().getPath() + getDBUri().getPath();
+        return "jdbc:postgresql://" + getDBUri().getHost() + ":" + getDBUri().getPort() + getDBUri().getPath();
     }
 
     public SQLDialect getDatabaseDialect() {
