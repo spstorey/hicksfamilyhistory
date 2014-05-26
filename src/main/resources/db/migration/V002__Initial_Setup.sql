@@ -10,12 +10,12 @@ create table person (
   primary key(person_id)
 );
 
-create table key (
+create table config (
   name varchar(50),
   value varchar(100)
 );
 
-insert into key values ('CONSUMER_KEY','QeIFue934HZPC9XfjyuQtncZfDf3vErD');
-insert into key values ('TOKEN','3D0hurZzfW8TgKCRtTrl4OilEf3g0tqT');
-insert into key values ('CONSUMER_SECRET','iofQ0RFptpmzOU26bRPPQHJGGMYwLdljrng3KdmXF7bkYa2R');
-insert into key values ('TOKEN_SECRET','amdboCuAwilN6z45wJ9RD0kdfFopTx1i7z4w6mBzxf11bPDq');
+insert into config values ('CONSUMER_KEY','QeIFue934HZPC9XfjyuQtncZfDf3vErD');
+insert into config values ('TOKEN','3D0hurZzfW8TgKCRtTrl4OilEf3g0tqT');
+insert into config values ('CONSUMER_SECRET','iofQ0RFptpmzOU26bRPPQHJGGMYwLdljrng3KdmXF7bkYa2R');
+insert into config values ('TOKEN_SECRET','amdboCuAwilN6z45wJ9RD0kdfFopTx1i7z4w6mBzxf11bPDq');

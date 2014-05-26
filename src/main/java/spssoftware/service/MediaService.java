@@ -15,7 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
-import spssoftware.dao.KeyDao;
+import spssoftware.dao.ConfigDao;
 import spssoftware.domain.Album;
 import spssoftware.domain.Photo;
 
@@ -29,12 +29,12 @@ public class MediaService {
     public static final String ROOT_URL = "https://api.copy.com/rest/meta/copy/content/hicksfamilyhistory";
     public static final String SITE = "hicksfamilyhistory";
 
-    private KeyDao keyDao;
+    private ConfigDao keyDao;
 
     private static Map<String, Album> albums = new HashMap<>();
 
     @Autowired
-    public MediaService(KeyDao keyDao) {
+    public MediaService(ConfigDao keyDao) {
         this.keyDao = keyDao;
     }
 
