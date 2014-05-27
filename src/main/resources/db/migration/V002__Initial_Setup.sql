@@ -7,7 +7,7 @@ CREATE TABLE "person" (
   "maiden_name"  VARCHAR(20),
   "birth_date"   TIMESTAMP,
   "death_date"   TIMESTAMP,
-  primary key(person_id)
+  PRIMARY KEY ("person_id")
 );
 
 CREATE TABLE "config" (
