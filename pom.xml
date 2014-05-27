@@ -256,7 +256,7 @@
                         <location>filesystem:src/main/resources/db/migration</location>
                     </locations>
                     <schemas>
-                        <schema>db8mngflmt7sa2</schema>
+                        <schema>hicks</schema>
                     </schemas>
                 </configuration>
                 <executions>
@@ -296,7 +296,7 @@
                                     <includes>.*</includes>
                                     <excludes></excludes>
                                     <dateAsTimestamp>true</dateAsTimestamp>
-                                    <inputSchema>db8mngflmt7sa2</inputSchema>
+                                    <inputSchema>hicks</inputSchema>
                                 </database>
                                 <generate>
                                     <deprecated>false</deprecated>

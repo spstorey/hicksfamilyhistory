@@ -16,6 +16,6 @@ public abstract class Config {
     public abstract SQLDialect getDatabaseDialect();
 
     public String getDatabaseSchema() {
-        return "db8mngflmt7sa2";
+        return "hicks";
     }
 }
