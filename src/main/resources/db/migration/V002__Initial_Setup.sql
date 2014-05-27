@@ -1,21 +1,21 @@
-create table person (
-  person_id varchar(32),
-  title varchar(20),
-  first_name varchar(20),
-  middle_names varchar(30),
-  surname varchar(20),
-  maiden_name varchar(20),
-  birth_date timestamp,
-  death_date timestamp,
+CREATE TABLE "person" (
+  "person_id"    VARCHAR(32),
+  "title"        VARCHAR(20),
+  "first_name"   VARCHAR(20),
+  "middle_names" VARCHAR(30),
+  "surname"      VARCHAR(20),
+  "maiden_name"  VARCHAR(20),
+  "birth_date"   TIMESTAMP,
+  "death_date"   TIMESTAMP,
   primary key(person_id)
 );
 
-create table config (
-  name varchar(50),
-  value varchar(100)
+CREATE TABLE "config" (
+  "name"  VARCHAR(50),
+  "value" VARCHAR(100)
 );
 
-insert into config values ('CONSUMER_KEY','QeIFue934HZPC9XfjyuQtncZfDf3vErD');
-insert into config values ('TOKEN','3D0hurZzfW8TgKCRtTrl4OilEf3g0tqT');
-insert into config values ('CONSUMER_SECRET','iofQ0RFptpmzOU26bRPPQHJGGMYwLdljrng3KdmXF7bkYa2R');
-insert into config values ('TOKEN_SECRET','amdboCuAwilN6z45wJ9RD0kdfFopTx1i7z4w6mBzxf11bPDq');
+INSERT INTO "config" VALUES ('CONSUMER_KEY', 'QeIFue934HZPC9XfjyuQtncZfDf3vErD');
+INSERT INTO "config" VALUES ('TOKEN', '3D0hurZzfW8TgKCRtTrl4OilEf3g0tqT');
+INSERT INTO "config" VALUES ('CONSUMER_SECRET', 'iofQ0RFptpmzOU26bRPPQHJGGMYwLdljrng3KdmXF7bkYa2R');
+INSERT INTO "config" VALUES ('TOKEN_SECRET', 'amdboCuAwilN6z45wJ9RD0kdfFopTx1i7z4w6mBzxf11bPDq');
