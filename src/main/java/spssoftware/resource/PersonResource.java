@@ -5,7 +5,7 @@ public class PersonResource {
     public enum Sex {MALE, FEMALE}
 
     private String firstName;
-    private String[] middlesName;
+    private String[] middlesNames;
     private String surname;
     private Sex sex;
 
@@ -17,12 +17,12 @@ public class PersonResource {
         this.firstName = firstName;
     }
 
-    public String[] getMiddlesName() {
-        return middlesName;
+    public String[] getMiddlesNames() {
+        return middlesNames;
     }
 
-    public void setMiddlesName(String[] middlesName) {
-        this.middlesName = middlesName;
+    public void setMiddlesNames(String[] middlesNames) {
+        this.middlesNames = middlesNames;
     }
 
     public String getSurname() {

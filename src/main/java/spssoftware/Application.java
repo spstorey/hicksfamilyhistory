@@ -20,17 +20,9 @@ import spssoftware.config.SystemHelper;
 public class Application {
 
     public static void main(String... args) {
-        System.out.println("********************* Opening on port " + System.getenv("PORT"));
-        System.out.println("********************* Opening db " + System.getenv("DATABASE_URL"));
         Config config = Application.getConfig();
 
         Flyway flyway = new Flyway();
-
-        System.out.println("********************* url " + config.getDatabaseUrl());
-        System.out.println("********************* username " + config.getDatabaseUsername());
-        System.out.println("********************* password " + config.getDatabasePassword());
-        System.out.println("********************* schema " + config.getDatabaseSchema());
-
         flyway.setDataSource(config.getDatabaseUrl(), config.getDatabaseUsername(), config.getDatabasePassword());
         flyway.setSchemas(config.getDatabaseSchema());
         flyway.setInitOnMigrate(true);
